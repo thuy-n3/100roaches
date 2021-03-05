@@ -16,14 +16,20 @@ class App extends Component {
   onCollectionUpdate = (querySnapshot) => {
     const locations = [];
     querySnapshot.forEach((doc) => {
-      const { name, riskScore, riskProfile } = doc.data();
+      const { name, address, city, state, zip, cuisine, riskScore, riskProfile, type } = doc.data();
       console.log(name);
       locations.push({
         key: doc.id,
         doc, // DocumentSnapshot
         name,
+        address,
+        city, 
+        state,
+        zip,
+        cuisine,
         riskScore,
         riskProfile,
+        type
       });
     });
     this.setState({
@@ -50,16 +56,28 @@ class App extends Component {
               <thead>
                 <tr>
                   <th>Name</th>
+                  <th>Address</th>
+                  <th>City</th>
+                  <th>State</th>
+                  <th>Zip</th>
+                  <th>Cuisine</th>
                   <th>Risk Score</th>
                   <th>Risk Profile</th>
+                  <th>Type</th>
                 </tr>
               </thead>
               <tbody>
                 {this.state.locations.map(location =>
                   <tr>
                     <td><Link to={`/show/${location.key}`}>{location.name}</Link></td>
+                    <td>{location.address}</td>
+                    <td>{location.city}</td>
+                    <td>{location.state}</td>
+                    <td>{location.zip}</td>
+                    <td>{location.cuisine}</td>
                     <td>{location.riskScore}</td>
                     <td>{location.riskProfile}</td>
+                    <td>{location.type}</td>
                   </tr>
                 )}
               </tbody>

@@ -10,10 +10,18 @@ class Create extends Component {
     this.ref = firebase.firestore().collection('locations');
     this.state = {
       name: '',
+      address: '',
+      city: '',
+      state: '',
+      zip: '',
+      cuisine: '',
       riskScore: '',
-      riskProfile: ''
+      riskProfile: '',
+      type: ''
     };
   }
+
+
   onChange = (e) => {
     const state = this.state
     state[e.target.name] = e.target.value;
@@ -24,17 +32,29 @@ class Create extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { name, riskScore, riskProfile } = this.state;
+    const { name, address, city, state, zip, cuisine, riskScore, riskProfile, type } = this.state;
 
     this.ref.add({
       name,
+      address,
+      city,
+      state,
+      zip,
+      cuisine,
       riskScore: Number(riskScore),
-      riskProfile: Number(riskProfile)
+      riskProfile,
+      type
     }).then((docRef) => {
       this.setState({
         name: '',
+        address: '',
+        city: '',
+        state: '',
+        zip: '',
+        cuisine: '',
         riskScore: '',
-        riskProfile: ''
+        riskProfile: '',
+        type: '',
       });
       this.props.history.push("/")
     })
@@ -44,7 +64,7 @@ class Create extends Component {
   }
 
   render() {
-    const { name, riskScore, riskProfile } = this.state;
+    const { name, address, city, state, zip, cuisine, riskScore, riskProfile, type } = this.state;
     return (
       <div class="container">
         <div class="panel panel-default">
@@ -61,12 +81,36 @@ class Create extends Component {
                 <input type="text" class="form-control" name="name" value={name} onChange={this.onChange} placeholder="name" />
               </div>
               <div class="form-group">
+                <label for="address">address:</label>
+                <input type="text" class="form-control" name="address" value={address} onChange={this.onChange} placeholder="address" />
+              </div>
+              <div class="form-group">
+                <label for="city">city:</label>
+                <input type="text" class="form-control" name="city" value={city} onChange={this.onChange} placeholder="city" />
+              </div>
+              <div class="form-group">
+                <label for="state">state:</label>
+                <input type="text" class="form-control" name="state" value={state} onChange={this.onChange} placeholder="state" />
+              </div>
+              <div class="form-group">
+                <label for="zip">zip:</label>
+                <input type="text" class="form-control" name="zip" value={zip} onChange={this.onChange} placeholder="zip" />
+              </div>
+              <div class="form-group">
+                <label for="cuisine">cuisine:</label>
+                <input type="text" class="form-control" name="cuisine" value={cuisine} onChange={this.onChange} placeholder="cuisine" />
+              </div>
+              <div class="form-group">
                 <label for="riskScore">riskScore:</label>
-                <textArea class="form-control" name="riskScore" onChange={this.onChange} placeholder="riskScore" cols="80" rows="3">{riskScore}</textArea>
+                <input type="text" class="form-control" name="riskScore" value={riskScore} onChange={this.onChange} placeholder="riskScore" />
               </div>
               <div class="form-group">
                 <label for="riskProfile">riskProfile:</label>
                 <input type="text" class="form-control" name="riskProfile" value={riskProfile} onChange={this.onChange} placeholder="riskProfile" />
+              </div>
+              <div class="form-group">
+                <label for="type">type:</label>
+                <input type="text" class="form-control" name="type" value={type} onChange={this.onChange} placeholder="type" />
               </div>
               <button type="submit" class="btn btn-success">Submit</button>
             </form>

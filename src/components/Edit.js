@@ -42,7 +42,7 @@ class Edit extends Component {
 
     const { title, description, author } = this.state;
 
-    const updateRef = firebase.firestore().collection('locations').doc(this.state.key);
+    const updateRef = firebase.firestore().collection('boards').doc(this.state.key);
     updateRef.set({
       title,
       description,
