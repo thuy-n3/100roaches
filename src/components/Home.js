@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 class Home extends Component {
 
 
-
+home 
 
   render() {
     return (
