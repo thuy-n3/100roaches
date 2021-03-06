@@ -8,9 +8,11 @@ class Edit extends Component {
     super(props);
     this.state = {
       key: '',
-      title: '',
-      description: '',
-      author: ''
+      name: '',
+      address: '',
+      city: '',
+      state: '',
+      
     };
   }
 
